@@ -42,7 +42,7 @@ steps:
 
 
 - script: |
-    npm run version $(Build.BuildNumber)
+    npm version $(Build.BuildNumber)
   displayName: 'npm set version'
 
 
