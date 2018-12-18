@@ -1,0 +1,68 @@
+name: 1.0$(rev:.r)
+
+pool:
+  name: Default
+  demands: npm
+resources:
+- repo: self
+
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run build'
+
+
+- task: Npm@1
+  displayName: 'npm test'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run test-ci'
+
+
+- task: PublishTestResults@2
+  displayName: 'publish test results'
+  inputs:
+    testResultsFiles: 'dist/__tests__/test-results.xml'
+
+  condition: succeededOrFailed()
+
+- task: CopyFiles@2
+  displayName: 'copy dist files'
+  inputs:
+    SourceFolder: dist/src
+
+    Contents: |
+     **/*.js
+     **/*.d.ts
+     **/*.json
+
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+
+- task: CopyFiles@2
+  displayName: 'copy other files'
+  inputs:
+    Contents: |
+     package.json
+     LICENSE
+     README.md
+
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifact: drop'
