@@ -40,6 +40,12 @@ steps:
 
   condition: succeededOrFailed()
 
+
+- script: |
+    npm run version $(Build.BuildNumber)
+  displayName: 'npm set version'
+
+
 - task: CopyFiles@2
   displayName: 'copy dist files'
   inputs:

@@ -1,6 +1,6 @@
 {
   "name": "node-insult",
-  "version": "1.0.9",
+  "version": "1.0.0",
   "description": "A port of the famous node-insult insult generator service",
   "repository": {
     "type": "git",
