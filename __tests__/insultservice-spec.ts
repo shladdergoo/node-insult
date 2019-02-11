@@ -106,7 +106,7 @@ const testDataWith10 = [
 describe('InsultService', () => {
   let repositoryMock: IInsultRepository = <IInsultRepository>{};
 
-  describe('GetInsults', () => {
+  describe('GetInsultsSync', () => {
     it('should call InsultRepository', () => {
       repositoryMock.GetInsultsSync = sinon.stub().returns(testDataWith2);
 
