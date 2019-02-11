@@ -9,7 +9,7 @@ const insults = require('../data');
 
 @injectable()
 export class InsultRepository implements IInsultRepository {
-  public GetInsults(): Insult[] {
+  public GetInsultsSync(): Insult[] {
     return insults;
   }
 }

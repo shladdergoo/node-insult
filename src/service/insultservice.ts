@@ -18,8 +18,8 @@ export class InsultService implements IInsultService {
     this._insultRepository = insultRepository;
   }
 
-  public GetInsults(): Insult[] {
-    const allInsults = this._insultRepository.GetInsults();
+  public GetInsultsSync(): Insult[] {
+    const allInsults = this._insultRepository.GetInsultsSync();
 
     return shuffle(allInsults).slice(0, 5);
   }

@@ -108,50 +108,50 @@ describe('InsultService', () => {
 
   describe('GetInsults', () => {
     it('should call InsultRepository', () => {
-      repositoryMock.GetInsults = sinon.stub().returns(testDataWith2);
+      repositoryMock.GetInsultsSync = sinon.stub().returns(testDataWith2);
 
       let sut: InsultService = new InsultService(repositoryMock);
 
-      sut.GetInsults();
+      sut.GetInsultsSync();
 
-      expect((<sinon.SinonStub>repositoryMock.GetInsults).calledOnce).to.be
+      expect((<sinon.SinonStub>repositoryMock.GetInsultsSync).calledOnce).to.be
         .true;
     });
 
     it('should return all results when it finds fewer than 5', () => {
-      repositoryMock.GetInsults = sinon.stub().returns(testDataWith2);
+      repositoryMock.GetInsultsSync = sinon.stub().returns(testDataWith2);
 
       let sut: IInsultService = new InsultService(repositoryMock);
 
-      expect(sut.GetInsults()).to.be.not.null;
-      expect(sut.GetInsults().length).to.equal(testDataWith2.length);
+      expect(sut.GetInsultsSync()).to.be.not.null;
+      expect(sut.GetInsultsSync().length).to.equal(testDataWith2.length);
     });
 
     it('should return all results when it finds exactly 5', () => {
-      repositoryMock.GetInsults = sinon.stub().returns(testDataWith5);
+      repositoryMock.GetInsultsSync = sinon.stub().returns(testDataWith5);
 
       let sut: IInsultService = new InsultService(repositoryMock);
 
-      expect(sut.GetInsults()).to.be.not.null;
-      expect(sut.GetInsults().length).to.equal(testDataWith5.length);
+      expect(sut.GetInsultsSync()).to.be.not.null;
+      expect(sut.GetInsultsSync().length).to.equal(testDataWith5.length);
     });
 
     it('should return only 5 results when it finds more than 5', () => {
-      repositoryMock.GetInsults = sinon.stub().returns(testDataWith10);
+      repositoryMock.GetInsultsSync = sinon.stub().returns(testDataWith10);
 
       let sut: IInsultService = new InsultService(repositoryMock);
 
-      expect(sut.GetInsults()).to.be.not.null;
-      expect(sut.GetInsults().length).to.equal(5);
+      expect(sut.GetInsultsSync()).to.be.not.null;
+      expect(sut.GetInsultsSync().length).to.equal(5);
     });
 
     it("should return empty array when it doesn't find insults", () => {
-      repositoryMock.GetInsults = sinon.stub().returns([]);
+      repositoryMock.GetInsultsSync = sinon.stub().returns([]);
 
       let sut: IInsultService = new InsultService(repositoryMock);
 
-      expect(sut.GetInsults()).to.be.not.null;
-      expect(sut.GetInsults().length).to.equal(0);
+      expect(sut.GetInsultsSync()).to.be.not.null;
+      expect(sut.GetInsultsSync().length).to.equal(0);
     });
   });
 });

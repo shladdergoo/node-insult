@@ -1,7 +1,7 @@
 import Insult from '../model/insult';
 
 export interface IInsultService {
-  GetInsults(): Insult[];
+  GetInsultsSync(): Insult[];
 }
 
 export default IInsultService;
