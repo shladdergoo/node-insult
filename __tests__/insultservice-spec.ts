@@ -8,7 +8,6 @@ import IInsultRepository from '../src/interface/iinsultrepository';
 import IInsultService from '../src/interface/iinsultservice';
 import InsultService from '../src/service/insultservice';
 import Insult from '../src/model/insult';
-import { AssertionError } from 'assert';
 
 const expect = chai.expect;
 
