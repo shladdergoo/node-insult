@@ -11,7 +11,7 @@ const insults = require('../data');
 export class InsultRepository implements IInsultRepository {
   public async GetInsults(): Promise<Insult[]> {
     return new Promise((resolve, reject) => {
-      return insults;
+      resolve(insults);
     });
   }
 
