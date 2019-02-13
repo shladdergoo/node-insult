@@ -8,6 +8,7 @@ import IInsultRepository from '../src/interface/iinsultrepository';
 import IInsultService from '../src/interface/iinsultservice';
 import InsultService from '../src/service/insultservice';
 import Insult from '../src/model/insult';
+import { AssertionError } from 'assert';
 
 const expect = chai.expect;
 
@@ -130,8 +131,7 @@ describe('InsultService', () => {
 
       let result: Promise<Insult[]> = sut.GetInsults();
 
-      expect(result).to.eventually.be.not.null;
-      expect(result).to.eventually.have.property(
+      return expect(result).to.eventually.have.property(
         'length',
         testDataWith2.length
       );
@@ -145,8 +145,7 @@ describe('InsultService', () => {
 
       let result: Promise<Insult[]> = sut.GetInsults();
 
-      expect(result).to.eventually.be.not.null;
-      expect(result).to.eventually.have.property(
+      return expect(result).to.eventually.have.property(
         'length',
         testDataWith5.length
       );
@@ -160,8 +159,7 @@ describe('InsultService', () => {
 
       let result: Promise<Insult[]> = sut.GetInsults();
 
-      expect(result).to.eventually.be.not.null;
-      expect(result).to.eventually.have.property('length', 5);
+      return expect(result).to.eventually.have.property('length', 5);
     });
 
     it("should return empty array when it doesn't find insults", () => {
@@ -172,8 +170,7 @@ describe('InsultService', () => {
 
       let result: Promise<Insult[]> = sut.GetInsults();
 
-      expect(result).to.eventually.be.not.null;
-      expect(result).to.eventually.have.property('length', 0);
+      return expect(result).to.eventually.have.property('length', 0);
     });
   });
 
