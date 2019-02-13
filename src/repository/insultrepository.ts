@@ -9,6 +9,12 @@ const insults = require('../data');
 
 @injectable()
 export class InsultRepository implements IInsultRepository {
+  public async GetInsults(): Promise<Insult[]> {
+    return new Promise((resolve, reject) => {
+      return insults;
+    });
+  }
+
   public GetInsultsSync(): Insult[] {
     return insults;
   }

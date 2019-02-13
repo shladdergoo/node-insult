@@ -18,6 +18,11 @@ export class InsultService implements IInsultService {
     this._insultRepository = insultRepository;
   }
 
+  public async GetInsults(): Promise<Insult[]> {
+    const allInsults = await this._insultRepository.GetInsults();
+    return shuffle(allInsults).slice(0, 5);
+  }
+
   public GetInsultsSync(): Insult[] {
     const allInsults = this._insultRepository.GetInsultsSync();
 

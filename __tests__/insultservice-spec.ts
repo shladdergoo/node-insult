@@ -1,11 +1,13 @@
 import 'mocha';
 import 'mocha-sinon';
 import * as chai from 'chai';
+import * as chaiAsPromised from 'chai-as-promised';
 import * as sinon from 'sinon';
 
 import IInsultRepository from '../src/interface/iinsultrepository';
 import IInsultService from '../src/interface/iinsultservice';
 import InsultService from '../src/service/insultservice';
+import Insult from '../src/model/insult';
 
 const expect = chai.expect;
 
@@ -105,6 +107,75 @@ const testDataWith10 = [
 
 describe('InsultService', () => {
   let repositoryMock: IInsultRepository = <IInsultRepository>{};
+
+  describe('GetInsults', () => {
+    it('should call InsultRepository', () => {
+      repositoryMock.GetInsults = sinon
+        .stub()
+        .returns(Promise.resolve(testDataWith2));
+
+      let sut: InsultService = new InsultService(repositoryMock);
+
+      sut.GetInsults().then(() => {
+        expect((<sinon.SinonStub>repositoryMock.GetInsults).calledOnce).to.be
+          .true;
+      });
+    });
+
+    it('should return all results when it finds fewer than 5', () => {
+      chai.use(chaiAsPromised);
+      repositoryMock.GetInsults = sinon.stub().returns(testDataWith2);
+
+      let sut: IInsultService = new InsultService(repositoryMock);
+
+      let result: Promise<Insult[]> = sut.GetInsults();
+
+      expect(result).to.eventually.be.not.null;
+      expect(result).to.eventually.have.property(
+        'length',
+        testDataWith2.length
+      );
+    });
+
+    it('should return all results when it finds exactly 5', () => {
+      chai.use(chaiAsPromised);
+      repositoryMock.GetInsults = sinon.stub().returns(testDataWith5);
+
+      let sut: IInsultService = new InsultService(repositoryMock);
+
+      let result: Promise<Insult[]> = sut.GetInsults();
+
+      expect(result).to.eventually.be.not.null;
+      expect(result).to.eventually.have.property(
+        'length',
+        testDataWith5.length
+      );
+    });
+
+    it('should return only 5 results when it finds more than 5', () => {
+      chai.use(chaiAsPromised);
+      repositoryMock.GetInsults = sinon.stub().returns(testDataWith10);
+
+      let sut: IInsultService = new InsultService(repositoryMock);
+
+      let result: Promise<Insult[]> = sut.GetInsults();
+
+      expect(result).to.eventually.be.not.null;
+      expect(result).to.eventually.have.property('length', 5);
+    });
+
+    it("should return empty array when it doesn't find insults", () => {
+      chai.use(chaiAsPromised);
+      repositoryMock.GetInsults = sinon.stub().returns([]);
+
+      let sut: IInsultService = new InsultService(repositoryMock);
+
+      let result: Promise<Insult[]> = sut.GetInsults();
+
+      expect(result).to.eventually.be.not.null;
+      expect(result).to.eventually.have.property('length', 0);
+    });
+  });
 
   describe('GetInsultsSync', () => {
     it('should call InsultRepository', () => {
