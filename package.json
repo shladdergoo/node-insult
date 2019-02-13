@@ -18,8 +18,8 @@
     "postbuild": "copyfiles -u 1 src/data.json dist/src",
     "build": "tsc --pretty",
     "pretest": "npm run build",
-    "test": "mocha dist/__tests__/**/*-spec.js --reporter mocha-multi-reporters --reporter-options configFile=__tests__/reporter-config.json",
-    "test-ci": "mocha dist/__tests__/**/*-spec.js --reporter mocha-multi-reporters --reporter-options configFile=__tests__/reporter-config.json"
+    "test": "mocha --require ts-node/register ./__tests__/**/*.ts --reporter mocha-multi-reporters --reporter-options configFile=__tests__/reporter-config.json",
+    "test-ci": "mocha --require ts-node/register ./__tests__/**/*.ts --reporter mocha-multi-reporters --reporter-options configFile=__tests__/reporter-config.json"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -40,6 +40,7 @@
     "prettier": "^1.15.3",
     "rimraf": "^2.6.2",
     "sinon": "^7.2.0",
+    "ts-node": "^8.0.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.2.2"
