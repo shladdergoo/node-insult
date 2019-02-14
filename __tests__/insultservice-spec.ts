@@ -108,6 +108,17 @@ const testDataWith10 = [
 describe('InsultService', () => {
   let repositoryMock: IInsultRepository = <IInsultRepository>{};
 
+  describe('ctor', () => {
+    it('should throw an exception when insultRepository undefined', () => {
+      expect(() => {
+        let insultRepository: IInsultRepository;
+        const insultService: IInsultService = new InsultService(
+          insultRepository!
+        );
+      }).to.throw(ReferenceError);
+    });
+  });
+
   describe('GetInsults', () => {
     it('should call InsultRepository', () => {
       repositoryMock.GetInsults = sinon

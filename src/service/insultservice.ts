@@ -15,6 +15,9 @@ export class InsultService implements IInsultService {
   constructor(
     @inject(Types.IInsultRepository) insultRepository: IInsultRepository
   ) {
+    if (insultRepository === undefined) {
+      throw new ReferenceError('insultRepository undefined');
+    }
     this._insultRepository = insultRepository;
   }
 
