@@ -16,6 +16,6 @@
         "text",
         "text-summary"
     ],
-    "temp-directory": "./coverage/.nyc_output",
-    "include-all-sources": "true"
+    "report-dir": "./dist/__tests__/coverage",
+    "temp-directory": "./dist/__tests__/coverage/.nyc_output"
 }
